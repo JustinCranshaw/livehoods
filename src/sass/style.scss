@@ -191,3 +191,9 @@ a {
 .two-col {
     gap: 30px;
 }
+
+.top-container {
+    a.nav-link.active {
+        color: $red !important;
+    }
+}
