@@ -1,9 +1,45 @@
 
-# Bootstrap 5 Boilerplate - Basic
+# Homepage for livehoods.org
 
-This is a Bootstrap 5 Boilerplate with Gulp 4+, cross-env, Sass, sourcemaps, concat, CSS & HTML minification, uglify, image optimization, template partials, BrowserSync.
+Install
+npm install
+Cmd
+If something goes wrong, delete the node_modules folder and run npm install again.
 
-[More in documentation](https://bootstrapstarter.com/template-basic5-bootstrap5-html/)
+Now let’s make sure you also have Gulp installed globally:
 
-![bootstrapstarter](src/img/screenshot.png)
+$ npm install gulp -g
+Cmd
+Start server
+gulp serve
+Cmd
+You should see a live browser at http://localhost:3000/.
+
+Development
+Override Bootstrap’s variables and create your custom styles
+
+src/scss/style.scss
+
+This will be automatically compiled to src/css/styles.css.
+
+Add custom scripts
+
+src/js/index.js
+
+Partials
+
+You can add partials in src/partials/.
+
+Insert partial : <partial src="header.html"></partial>.
+
+Examples are already added in this this project for header & footer.
+
+Production
+gulp
+Cmd
+If you want HTML, CSS minification & image optimization:
+
+npm run prod
+Cmd
+Docs folder is the destination. You can now go docs/index.html and check the output.
 
