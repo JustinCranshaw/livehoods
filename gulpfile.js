@@ -1,7 +1,8 @@
 const gulp = require('gulp');
 const gulpIf = require('gulp-if');
 const browserSync = require('browser-sync').create();
-const sass = require('gulp-sass');
+const sass = require('sass'); // Import Dart Sass directly
+const gulpSass = require('gulp-sass')(sass); // Initialize gulp-sass with Dart Sass
 const htmlmin = require('gulp-htmlmin');
 const cssmin = require('gulp-cssmin');
 const uglify = require('gulp-uglify');
@@ -15,7 +16,7 @@ const isProd = process.env.NODE_ENV === 'prod';
 
 const htmlFile = [
     'src/*.html'
-]
+];
 
 function html() {
     return gulp.src(htmlFile)
@@ -31,9 +32,7 @@ function html() {
 function css() {
     return gulp.src('src/sass/style.scss')
         .pipe(gulpIf(!isProd, sourcemaps.init()))
-        .pipe(sass({
-            includePaths: ['node_modules']
-        }).on('error', sass.logError))
+        .pipe(gulpSass().on('error', gulpSass.logError)) // Ensure this uses gulpSass
         .pipe(gulpIf(!isProd, sourcemaps.write()))
         .pipe(gulpIf(isProd, cssmin()))
         .pipe(gulp.dest('docs/css/'));
@@ -67,13 +66,11 @@ function browserSyncReload(done) {
     done();
 }
 
-
 function watchFiles() {
     gulp.watch('src/**/*.html', gulp.series(html, browserSyncReload));
     gulp.watch('src/**/*.scss', gulp.series(css, browserSyncReload));
     gulp.watch('src/**/*.js', gulp.series(js, browserSyncReload));
     gulp.watch('src/img/**/*.*', gulp.series(img));
-
     return;
 }
 
